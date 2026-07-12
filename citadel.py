@@ -108,24 +108,28 @@ def load_archive():
 # Program runs here
 
 
-load_archive()
+def main():
+    load_archive()
 
-while True:
-    show_menu()
-    choice = input("Choose an option: ").strip()
-    if choice == '1':
-        view_characters()
-    elif choice == '2':
-        search_character()
-    elif choice == '3':
-        add_character()
-    elif choice == '4':
-        remove_character()
-    elif choice == '5':
-        save_archive()
-    elif choice == '6':
-        save_archive()
-        print("Goodbye.")
-        break
-    else:
-        print("Invalid choice. Please try again.")
+    while True:
+        show_menu()
+        choice = input("Choose an option: ").strip()
+        if choice == '1':
+            view_characters()
+        elif choice == '2':
+            search_character()
+        elif choice == '3':
+            add_character()
+        elif choice == '4':
+            remove_character()
+        elif choice == '5':
+            save_archive()
+        elif choice == '6':
+            save_archive()
+            print("Goodbye.")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
