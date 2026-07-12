@@ -92,7 +92,7 @@ def load_archive():
     global characters
 
     try:
-        with open("characters.json", "r") as file:
+        with open("characters.json", "r",  encoding="utf-8") as file:
             characters = json.load(file)
 
         print("Archive loaded successfully.")
