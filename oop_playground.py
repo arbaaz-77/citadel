@@ -23,7 +23,18 @@ class Archive:
 
 
     def add_character(self, character):
+        if not isinstance(character, Character):
+            print("Only Character objects can be added.")
+            return
+        
         self.characters.append(character)
+
+    def find_character(self, name):
+        for character in self.characters:
+            if character.name.strip().casefold() == name.strip().casefold():
+                return character
+        return None
+
 
 
 
@@ -35,3 +46,7 @@ brienne = Character("Brienne of Tarth", "Tarth", "Lord Commander of the Kingsgua
 archive = Archive([jon, tyrion, arya])
 archive.add_character(brienne)
 
+character = archive.find_character("Jon Snow")
+
+if character:
+    character.introduce()
