@@ -11,6 +11,21 @@ class Character:
     def introduce(self):
         print(f"I am {self.name}. \nI belong to House {self.house}. \nMy title is {self.title}.")
 
+    def to_dict(self):
+        return {
+            "name": self.name,
+            "house": self.house,
+            "title": self.title
+        }
+    
+    @classmethod
+    def from_dict(cls, data):
+        return cls(
+            data["name"],
+            data["house"],
+            data["title"]
+        )
+
 
 class Archive:
     def __init__(self, characters=None):
@@ -55,7 +70,39 @@ class Archive:
         else:
             print("No record exists.")
 
+    def save(self):
+        character_data = []
+
+        for character in self.characters:
+            character_data.append(character.to_dict())
+
+        with open("characters.json", "w", encoding="utf-8") as file:
+            json.dump(character_data, file, indent=4)
+
+        print("Archive saved successfully.")
+
+    def load(self):
+        try:
+            with open("characters.json", "r", encoding="utf-8") as file:
+                character_data = json.load(file)
+
+            self.characters = []
+
+            for data in character_data:
+                character = Character.from_dict(data)
+                self.characters.append(character)
+
+            print("Archive loaded successfully.")
+
+        except FileNotFoundError:
+            print("No archive found. Starting with the default records.")
+
+        except json.JSONDecodeError:
+            print("The archive is damaged. Starting with the default records.")
+
+
 # functions
+
 
 def show_menu():
     print("\n===== THE CITADEL ARCHIVE =====")
@@ -63,7 +110,7 @@ def show_menu():
     print("2. Search Character")
     print("3. Add Character")
     print("4. Remove Character")
-    # print("5. Save Archive")
+    print("5. Save Archive")
     print("6. Exit")
 
 def add_character_from_input(archive):
@@ -95,27 +142,6 @@ def remove_character_from_input(archive):
 
     archive.remove_character(name)
 
-
-def save_archive():
-    with open('characters.json', 'w', encoding="utf-8") as file:
-        json.dump(characters, file, indent=4)
-    print("Archive saved successfully.")
-
-def load_archive():
-    global characters
-
-    try:
-        with open("characters.json", "r",  encoding="utf-8") as file:
-            characters = json.load(file)
-
-        print("Archive loaded successfully.")
-
-    except FileNotFoundError:
-        print("No archive found. Starting with the default records.")
-
-    except json.JSONDecodeError:
-        print("The archive is damaged. Starting with the default records.")
-
 # Character Data
 characters = [
     Character(
@@ -138,11 +164,12 @@ characters = [
 
 # Program runs here
 def main():
-    #load_archive()
+    archive.load()
 
     while True:
         show_menu()
         choice = input("Choose an option: ").strip()
+
         if choice == '1':
             archive.view_characters()
         elif choice == '2':
@@ -151,10 +178,10 @@ def main():
             add_character_from_input(archive)
         elif choice == '4':
             remove_character_from_input(archive)
-        # elif choice == '5':
-            # save_archive()
+        elif choice == '5':
+            archive.save()
         elif choice == '6':
-            # save_archive()
+            archive.save()
             print("Goodbye.")
             break
         else:
