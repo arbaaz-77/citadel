@@ -13,5 +13,10 @@
         "name": "Daenerys Targaryen",
         "house": "Targaryen",
         "title": "Mother of Dragons"
+    },
+    {
+        "name": "Robert Baratheon",
+        "house": "Baratheon",
+        "title": "The King"
     }
 ]
