@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Jon Snow",
+        "house": "Stark",
+        "title": "King in the North"
+    },
+    {
+        "name": "Tyrion Lannister",
+        "house": "Lannister",
+        "title": "Hand of the King"
+    },
+    {
+        "name": "Daenerys Targaryen",
+        "house": "Targaryen",
+        "title": "Mother of Dragons"
+    }
+]
