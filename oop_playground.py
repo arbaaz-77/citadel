@@ -27,7 +27,12 @@ class Archive:
             print("Only Character objects can be added.")
             return
         
+        if self.find_character(character.name):
+            print(f"{character.name} already exists in the archive.")
+            return
+        
         self.characters.append(character)
+        print(f"{character.name} added successfully.")
 
     def find_character(self, name):
         for character in self.characters:
