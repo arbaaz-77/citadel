@@ -1,23 +1,5 @@
 import json
 
-characters = [
-    Character(
-        "Jon Snow",
-        "Stark",
-        "King in the North"
-    ),
-    Character(
-        "Tyrion Lannister",
-        "Lannister",
-        "Hand of the King"
-    ),
-    Character(
-        "Daenerys Targaryen",
-        "Targaryen",
-        "Mother of Dragons"
-    )
-]
-
 class Character:
 
     def __init__(self, name, house, title):
@@ -63,6 +45,15 @@ class Archive:
 
         self.characters.append(character)
         print(f"{character.name} added successfully.")
+    
+    def remove_character(self, name):
+        character = self.find_character(name)
+
+        if character:
+            self.characters.remove(character)
+            print(f"Character {character.name} removed successfully.")
+        else:
+            print("No record exists.")
 
 # functions
 
@@ -72,7 +63,7 @@ def show_menu():
     print("2. Search Character")
     print("3. Add Character")
     print("4. Remove Character")
-    print("5. Save Archive")
+    # print("5. Save Archive")
     print("6. Exit")
 
 def add_character_from_input(archive):
@@ -93,22 +84,17 @@ def search_character_from_input(archive):
     
     if character:
         print(f"Character found!")
-        print(f"Name: {character['name']}")
-        print(f"House: {character['house']}")
-        print(f"Title: {character['title']}")
+        print(f"Name: {character.name}")
+        print(f"House: {character.house}")
+        print(f"Title: {character.title}")
     else:
         print("No record exists.")
 
+def remove_character_from_input(archive):
+    name = input("Enter name of the character to remove: ").strip()
 
-def remove_character():
-    name = input("Enter the name of the character to remove: ").strip()
-    character = archive.find_character(name)
+    archive.remove_character(name)
 
-    if character:
-        characters.remove(character)
-        print(f"Character {character['name']} removed successfully.")
-    else:
-        print("No record exists.")
 
 def save_archive():
     with open('characters.json', 'w', encoding="utf-8") as file:
@@ -130,11 +116,29 @@ def load_archive():
     except json.JSONDecodeError:
         print("The archive is damaged. Starting with the default records.")
 
+# Character Data
+characters = [
+    Character(
+        "Jon Snow",
+        "Stark",
+        "King in the North"
+    ),
+    Character(
+        "Tyrion Lannister",
+        "Lannister",
+        "Hand of the King"
+    ),
+    Character(
+        "Daenerys Targaryen",
+        "Targaryen",
+        "Mother of Dragons"
+    )
+]
 
 
 # Program runs here
 def main():
-    load_archive()
+    #load_archive()
 
     while True:
         show_menu()
@@ -146,11 +150,11 @@ def main():
         elif choice == '3':
             add_character_from_input(archive)
         elif choice == '4':
-            remove_character()
-        elif choice == '5':
-            save_archive()
+            remove_character_from_input(archive)
+        # elif choice == '5':
+            # save_archive()
         elif choice == '6':
-            save_archive()
+            # save_archive()
             print("Goodbye.")
             break
         else:
