@@ -1,5 +1,23 @@
 import json
 
+characters = [
+    Character(
+        "Jon Snow",
+        "Stark",
+        "King in the North"
+    ),
+    Character(
+        "Tyrion Lannister",
+        "Lannister",
+        "Hand of the King"
+    ),
+    Character(
+        "Daenerys Targaryen",
+        "Targaryen",
+        "Mother of Dragons"
+    )
+]
+
 class Character:
 
     def __init__(self, name, house, title):
@@ -15,6 +33,17 @@ class Character:
 class Archive:
     def __init__(self, characters=None):
         self.characters = characters if characters is not None else []
+
+    def view_characters(self):
+        if not self.characters:
+            print("The archive contains no records.")
+            return
+        
+        for character in self.characters:
+            print(f"Name: {character.name}")
+            print(f"House: {character.house}")
+            print(f"Title: {character.title}")
+            print("-" * 35)
 
     def find_character(self, name):
         for character in self.characters:
@@ -35,25 +64,6 @@ class Archive:
         self.characters.append(character)
         print(f"{character.name} added successfully.")
 
-    
-characters = [
-    {
-        "name": "Jon Snow",
-        "house": "Stark",
-        "title": "King in the North"
-    },
-    {
-        "name": "Tyrion Lannister",
-        "house": "Lannister",
-        "title": "Hand of the King"
-    },
-    {
-        "name": "Daenerys Targaryen",
-        "house": "Targaryen",
-        "title": "Mother of Dragons"
-    }
-]
-
 # functions
 
 def show_menu():
@@ -64,14 +74,6 @@ def show_menu():
     print("4. Remove Character")
     print("5. Save Archive")
     print("6. Exit")
-
-
-def view_characters():
-    for character in characters:
-        print(f"Name: {character['name']}")
-        print(f"House: {character['house']}")
-        print(f"Title: {character['title']}")
-        print("-" * 35)
 
 def add_character_from_input(archive):
     name = input("Enter character name: ").strip()
@@ -85,9 +87,9 @@ def add_character_from_input(archive):
     character = Character(name,house,title)
     archive.add_character(character)
 
-def search_character():
+def search_character_from_input(archive):
     search_name = input("Enter the name of the character to search: ").strip()
-    character = find_character(search_name)
+    character = archive.find_character(search_name)
     
     if character:
         print(f"Character found!")
@@ -100,19 +102,13 @@ def search_character():
 
 def remove_character():
     name = input("Enter the name of the character to remove: ").strip()
-    character = find_character(name)
+    character = archive.find_character(name)
 
     if character:
         characters.remove(character)
         print(f"Character {character['name']} removed successfully.")
     else:
         print("No record exists.")
-
-def find_character(name):
-    for character in characters:
-        if character['name'].strip().casefold() == name.strip().casefold():
-            return character
-    return None
 
 def save_archive():
     with open('characters.json', 'w', encoding="utf-8") as file:
@@ -144,9 +140,9 @@ def main():
         show_menu()
         choice = input("Choose an option: ").strip()
         if choice == '1':
-            view_characters()
+            archive.view_characters()
         elif choice == '2':
-            search_character()
+            search_character_from_input(archive)
         elif choice == '3':
             add_character_from_input(archive)
         elif choice == '4':
@@ -160,6 +156,6 @@ def main():
         else:
             print("Invalid choice. Please try again.")
 
-archive = Archive()
+archive = Archive(characters)
 if __name__ == "__main__":
     main()
