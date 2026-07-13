@@ -1,5 +1,41 @@
 import json
 
+class Character:
+
+    def __init__(self, name, house, title):
+
+        self.name = name
+        self.house = house
+        self.title = title
+
+    def introduce(self):
+        print(f"I am {self.name}. \nI belong to House {self.house}. \nMy title is {self.title}.")
+
+
+class Archive:
+    def __init__(self, characters=None):
+        self.characters = characters if characters is not None else []
+
+    def find_character(self, name):
+        for character in self.characters:
+            if character.name.casefold() == name.strip().casefold():
+                return character
+
+        return None
+
+    def add_character(self, character):
+        if not isinstance(character, Character):
+            print("Only Character objects can be added.")
+            return
+
+        if self.find_character(character.name):
+            print(f"{character.name} already exists in the archive.")
+            return
+
+        self.characters.append(character)
+        print(f"{character.name} added successfully.")
+
+    
 characters = [
     {
         "name": "Jon Snow",
@@ -37,6 +73,18 @@ def view_characters():
         print(f"Title: {character['title']}")
         print("-" * 35)
 
+def add_character_from_input(archive):
+    name = input("Enter character name: ").strip()
+    house = input("Enter character house: ").strip()
+    title = input("Enter character title: ").strip()
+
+    if not name:
+        print("Character name cannot be empty.")
+        return
+    
+    character = Character(name,house,title)
+    archive.add_character(character)
+
 def search_character():
     search_name = input("Enter the name of the character to search: ").strip()
     character = find_character(search_name)
@@ -49,23 +97,6 @@ def search_character():
     else:
         print("No record exists.")
 
-def add_character():
-    name = input("Enter character name: ").strip()
-    house = input("Enter character house: ").strip()
-    title = input("Enter character title: ").strip()
-
-    if not name:
-        print("Character name cannot be empty.")
-        return
-    
-    if find_character(name):
-        print("A character with that name already exists.")
-        return
-
-    characters.append({"name": name, "house": house, "title": title})
-    print(f"Character {name} added successfully.")
-
-    
 
 def remove_character():
     name = input("Enter the name of the character to remove: ").strip()
@@ -106,8 +137,6 @@ def load_archive():
 
 
 # Program runs here
-
-
 def main():
     load_archive()
 
@@ -119,7 +148,7 @@ def main():
         elif choice == '2':
             search_character()
         elif choice == '3':
-            add_character()
+            add_character_from_input(archive)
         elif choice == '4':
             remove_character()
         elif choice == '5':
@@ -131,5 +160,6 @@ def main():
         else:
             print("Invalid choice. Please try again.")
 
+archive = Archive()
 if __name__ == "__main__":
     main()
