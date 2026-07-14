@@ -14,7 +14,7 @@ def show_menu():
     print("6. Exit")
 
 
-def add_character_from_input(archive):
+def add_character_from_input(archive, houses):
     name = input("Enter character name: ").strip()
     house_name = input("Enter character house: ").strip().casefold()
     title = input("Enter character title: ").strip()
@@ -61,9 +61,9 @@ lannister = House("Lannister", "Hear Me Roar!", "Lion", "The Westerlands")
 targaryen = House("Targaryen", "Fire and Blood", "Three-Headed Dragon", "Dragonstone")
 
 houses = {
-    "stark": stark,
-    "lannister": lannister,
-    "targaryen": targaryen,
+    stark.name.casefold(): stark,
+    lannister.name.casefold(): lannister,
+    targaryen.name.casefold(): targaryen,
 }
 
 # Character Data
@@ -87,7 +87,7 @@ def main():
         elif choice == "2":
             search_character_from_input(archive)
         elif choice == "3":
-            add_character_from_input(archive)
+            add_character_from_input(archive, houses)
         elif choice == "4":
             remove_character_from_input(archive)
         elif choice == "5":
