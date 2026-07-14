@@ -25,6 +25,7 @@ The Citadel Archive allows users to manage a collection of characters by viewing
 ```text
 citadel/
 │
+├── archive.py          # Archive management and JSON persistence
 ├── character.py        # Character model
 ├── citadel.py          # Archive, menu, and application entry point
 ├── characters.json     # Persistent character data
@@ -128,7 +129,6 @@ docs: update README for OOP refactor
 
 ## 🎯 Future Improvements
 
-- Split `Archive` into its own module (`archive.py`)
 - Add unit tests using `pytest`
 - Introduce type hints throughout the project
 - Add character editing functionality
