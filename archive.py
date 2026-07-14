@@ -4,8 +4,9 @@ from character import Character
 
 
 class Archive:
-    def __init__(self, characters=None):
+    def __init__(self, characters=None, houses=None):
         self.characters = characters if characters is not None else []
+        self.houses = houses if houses is not None else {}
 
     def view_characters(self):
         if not self.characters:
@@ -14,7 +15,7 @@ class Archive:
 
         for character in self.characters:
             print(f"Name: {character.name}")
-            print(f"House: {character.house}")
+            print(f"House: {character.house.name}")
             print(f"Title: {character.title}")
             print("-" * 35)
 
@@ -65,7 +66,7 @@ class Archive:
             self.characters = []
 
             for data in character_data:
-                character = Character.from_dict(data)
+                character = Character.from_dict(data, self.houses)
                 self.characters.append(character)
 
             print("Archive loaded successfully.")

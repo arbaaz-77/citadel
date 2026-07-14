@@ -1,17 +1,42 @@
 [
     {
         "name": "Jon Snow",
-        "house": "Stark",
+        "house": {
+            "name": "Stark",
+            "words": "Winter is Coming",
+            "sigil": "Direwolf",
+            "region": "The North"
+        },
         "title": "King in the North"
     },
     {
         "name": "Tyrion Lannister",
-        "house": "Lannister",
+        "house": {
+            "name": "Lannister",
+            "words": "Hear Me Roar!",
+            "sigil": "Lion",
+            "region": "The Westerlands"
+        },
         "title": "Hand of the King"
     },
     {
         "name": "Daenerys Targaryen",
-        "house": "Targaryen",
+        "house": {
+            "name": "Targaryen",
+            "words": "Fire and Blood",
+            "sigil": "Three-Headed Dragon",
+            "region": "Dragonstone"
+        },
         "title": "Mother of Dragons"
+    },
+    {
+        "name": "Arya Stark",
+        "house": {
+            "name": "Stark",
+            "words": "Winter is Coming",
+            "sigil": "Direwolf",
+            "region": "The North"
+        },
+        "title": "No One"
     }
 ]

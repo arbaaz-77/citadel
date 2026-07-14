@@ -1,5 +1,6 @@
 from archive import Archive
 from character import Character
+from house import House
 
 
 # functions
@@ -13,13 +14,19 @@ def show_menu():
     print("6. Exit")
 
 
-def add_character_from_input(archive):
+def add_character_from_input(archive, houses):
     name = input("Enter character name: ").strip()
-    house = input("Enter character house: ").strip()
+    house_name = input("Enter character house: ").strip().casefold()
     title = input("Enter character title: ").strip()
 
     if not name:
         print("Character name cannot be empty.")
+        return
+
+    house = houses.get(house_name)
+
+    if house is None:
+        print("That house does not exist in the archive.")
         return
 
     character = Character(name, house, title)
@@ -33,7 +40,7 @@ def search_character_from_input(archive):
     if character:
         print("Character found!")
         print(f"Name: {character.name}")
-        print(f"House: {character.house}")
+        print(f"House: {character.house.name}")
         print(f"Title: {character.title}")
     else:
         print("No record exists.")
@@ -45,11 +52,25 @@ def remove_character_from_input(archive):
     archive.remove_character(name)
 
 
+# House Data
+
+stark = House("Stark", "Winter is Coming", "Direwolf", "The North")
+
+lannister = House("Lannister", "Hear Me Roar!", "Lion", "The Westerlands")
+
+targaryen = House("Targaryen", "Fire and Blood", "Three-Headed Dragon", "Dragonstone")
+
+houses = {
+    stark.name.casefold(): stark,
+    lannister.name.casefold(): lannister,
+    targaryen.name.casefold(): targaryen,
+}
+
 # Character Data
 characters = [
-    Character("Jon Snow", "Stark", "King in the North"),
-    Character("Tyrion Lannister", "Lannister", "Hand of the King"),
-    Character("Daenerys Targaryen", "Targaryen", "Mother of Dragons"),
+    Character("Jon Snow", stark, "King in the North"),
+    Character("Tyrion Lannister", lannister, "Hand of the King"),
+    Character("Daenerys Targaryen", targaryen, "Mother of Dragons"),
 ]
 
 
@@ -66,7 +87,7 @@ def main():
         elif choice == "2":
             search_character_from_input(archive)
         elif choice == "3":
-            add_character_from_input(archive)
+            add_character_from_input(archive, houses)
         elif choice == "4":
             remove_character_from_input(archive)
         elif choice == "5":
@@ -79,6 +100,6 @@ def main():
             print("Invalid choice. Please try again.")
 
 
-archive = Archive(characters)
+archive = Archive(characters, houses)
 if __name__ == "__main__":
     main()
