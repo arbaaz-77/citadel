@@ -2,7 +2,6 @@
 
 ![Python](https://img.shields.io/badge/Python-3.14-blue)
 ![Status](https://img.shields.io/badge/status-in%20development-green)
-![License](https://img.shields.io/badge/license-MIT-blue)
 
 A command-line Python application inspired by the **Game of Thrones** and **A Song of Ice and Fire** universe.
 
@@ -79,7 +78,6 @@ citadel/
 - File I/O
 - JSON
 - Error handling
-- 
 - Object composition
 - Serialization
 - Shared object registries
@@ -92,15 +90,15 @@ The project is organized into small, focused modules.
 
 ```text
 citadel.py
-    │
-    ▼
+├── archive.py
+├── character.py
+└── house.py
+
 archive.py
-    │
-    ▼
+└── character.py
+
 character.py
-    │
-    ▼
-house.py
+└── house.py
 ```
 ---
 
