@@ -1,8 +1,13 @@
-# 🏰 Citadel Archive v2.0
+# 🏰 Citadel Archive
+
+![Python](https://img.shields.io/badge/Python-3.14-blue)
+![Status](https://img.shields.io/badge/status-in%20development-green)
+![License](https://img.shields.io/badge/license-MIT-blue)
 
 A command-line Python application inspired by the **Game of Thrones** and **A Song of Ice and Fire** universe.
 
-The Citadel Archive allows users to manage a collection of characters by viewing, searching, adding, removing, saving, and loading records. While it began as a procedural Python project, Version 2.0 has been fully refactored into an object-oriented application to demonstrate clean software design and modern development practices.
+The Citadel Archive allows users to manage a collection of Game of Thrones characters by viewing, searching, adding, removing, saving, and loading records.
+The project began as a procedural Python application and has since evolved into an object-oriented codebase to demonstrate clean software design, modular architecture, and modern Git workflows.
 
 ---
 
@@ -17,6 +22,7 @@ The Citadel Archive allows users to manage a collection of characters by viewing
 - Load the archive from a JSON file
 - Automatic validation of character objects
 - Case-insensitive searching
+- Shared House objects using object composition
 
 ---
 
@@ -27,7 +33,8 @@ citadel/
 │
 ├── archive.py          # Archive management and JSON persistence
 ├── character.py        # Character model
-├── citadel.py          # Archive, menu, and application entry point
+├── house.py            # House model
+├── citadel.py          # Menu, input handling and application entry point
 ├── characters.json     # Persistent character data
 ├── README.md
 └── .gitignore
@@ -59,19 +66,42 @@ citadel/
 - `Archive` is responsible for managing the collection of characters.
 - User input is separated from business logic.
 - `main()` controls the application flow.
+- House represents a shared domain object used by multiple characters.
 
 ### Python Concepts
 
 - Classes
+- Functions
 - Lists
 - Loops
 - Conditionals
-- Functions
-- Error handling
+- Modules
 - File I/O
 - JSON
-- Modules and imports
+- Error handling
+- 
+- Object composition
+- Serialization
+- Shared object registries
 
+---
+
+## 🏛️ Architecture
+
+The project is organized into small, focused modules.
+
+```text
+citadel.py
+    │
+    ▼
+archive.py
+    │
+    ▼
+character.py
+    │
+    ▼
+house.py
+```
 ---
 
 ## 💾 Example Character
@@ -132,7 +162,6 @@ docs: update README for OOP refactor
 - Add unit tests using `pytest`
 - Introduce type hints throughout the project
 - Add character editing functionality
-- Manage Houses as their own objects
 - Store additional character attributes (weapon, allegiance, status)
 - Add filtering and sorting
 - Build a graphical interface
@@ -152,7 +181,7 @@ The focus is not only on learning Python syntax, but also on building strong sof
 - Refactoring
 - Git and GitHub workflows
 - Project organization
-- Preparing for AI application development
+- Building the software engineering foundation required for AI application development.
 
 ---
 
