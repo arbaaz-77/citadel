@@ -1,6 +1,7 @@
 from archive import Archive
 from character import Character
 
+
 # functions
 def show_menu():
     print("\n===== THE CITADEL ARCHIVE =====")
@@ -11,6 +12,7 @@ def show_menu():
     print("5. Save Archive")
     print("6. Exit")
 
+
 def add_character_from_input(archive):
     name = input("Enter character name: ").strip()
     house = input("Enter character house: ").strip()
@@ -19,44 +21,35 @@ def add_character_from_input(archive):
     if not name:
         print("Character name cannot be empty.")
         return
-    
-    character = Character(name,house,title)
+
+    character = Character(name, house, title)
     archive.add_character(character)
+
 
 def search_character_from_input(archive):
     search_name = input("Enter the name of the character to search: ").strip()
     character = archive.find_character(search_name)
-    
+
     if character:
-        print(f"Character found!")
+        print("Character found!")
         print(f"Name: {character.name}")
         print(f"House: {character.house}")
         print(f"Title: {character.title}")
     else:
         print("No record exists.")
 
+
 def remove_character_from_input(archive):
     name = input("Enter name of the character to remove: ").strip()
 
     archive.remove_character(name)
 
+
 # Character Data
 characters = [
-    Character(
-        "Jon Snow",
-        "Stark",
-        "King in the North"
-    ),
-    Character(
-        "Tyrion Lannister",
-        "Lannister",
-        "Hand of the King"
-    ),
-    Character(
-        "Daenerys Targaryen",
-        "Targaryen",
-        "Mother of Dragons"
-    )
+    Character("Jon Snow", "Stark", "King in the North"),
+    Character("Tyrion Lannister", "Lannister", "Hand of the King"),
+    Character("Daenerys Targaryen", "Targaryen", "Mother of Dragons"),
 ]
 
 
@@ -68,22 +61,23 @@ def main():
         show_menu()
         choice = input("Choose an option: ").strip()
 
-        if choice == '1':
+        if choice == "1":
             archive.view_characters()
-        elif choice == '2':
+        elif choice == "2":
             search_character_from_input(archive)
-        elif choice == '3':
+        elif choice == "3":
             add_character_from_input(archive)
-        elif choice == '4':
+        elif choice == "4":
             remove_character_from_input(archive)
-        elif choice == '5':
+        elif choice == "5":
             archive.save()
-        elif choice == '6':
+        elif choice == "6":
             archive.save()
             print("Goodbye.")
             break
         else:
             print("Invalid choice. Please try again.")
+
 
 archive = Archive(characters)
 if __name__ == "__main__":

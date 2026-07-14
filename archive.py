@@ -2,6 +2,7 @@ import json
 
 from character import Character
 
+
 class Archive:
     def __init__(self, characters=None):
         self.characters = characters if characters is not None else []
@@ -10,7 +11,7 @@ class Archive:
         if not self.characters:
             print("The archive contains no records.")
             return
-        
+
         for character in self.characters:
             print(f"Name: {character.name}")
             print(f"House: {character.house}")
@@ -35,7 +36,7 @@ class Archive:
 
         self.characters.append(character)
         print(f"{character.name} added successfully.")
-    
+
     def remove_character(self, name):
         character = self.find_character(name)
 

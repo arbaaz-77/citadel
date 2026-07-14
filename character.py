@@ -7,19 +7,13 @@ class Character:
         self.title = title
 
     def introduce(self):
-        print(f"I am {self.name}. \nI belong to House {self.house}. \nMy title is {self.title}.")
+        print(
+            f"I am {self.name}. \nI belong to House {self.house}. \nMy title is {self.title}."
+        )
 
     def to_dict(self):
-        return {
-            "name": self.name,
-            "house": self.house,
-            "title": self.title
-        }
-    
+        return {"name": self.name, "house": self.house, "title": self.title}
+
     @classmethod
     def from_dict(cls, data):
-        return cls(
-            data["name"],
-            data["house"],
-            data["title"]
-        )
+        return cls(data["name"], data["house"], data["title"])
