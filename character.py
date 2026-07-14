@@ -1,3 +1,6 @@
+from house import House
+
+
 class Character:
 
     def __init__(self, name, house, title):
@@ -8,7 +11,7 @@ class Character:
 
     def introduce(self):
         print(
-            f"I am {self.name}. \nI belong to House {self.house}. \nMy title is {self.title}."
+            f"I am {self.name}. \nI belong to House {self.house.name}. \nMy title is {self.title}."
         )
 
     def to_dict(self):
