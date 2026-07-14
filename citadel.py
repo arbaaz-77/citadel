@@ -40,7 +40,7 @@ def search_character_from_input(archive):
     if character:
         print("Character found!")
         print(f"Name: {character.name}")
-        print(f"House: {character.house}")
+        print(f"House: {character.house.name}")
         print(f"Title: {character.title}")
     else:
         print("No record exists.")
