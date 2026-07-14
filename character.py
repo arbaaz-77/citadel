@@ -15,8 +15,10 @@ class Character:
         )
 
     def to_dict(self):
-        return {"name": self.name, "house": self.house, "title": self.title}
+        return {"name": self.name, "house": self.house.to_dict(), "title": self.title}
 
     @classmethod
     def from_dict(cls, data):
-        return cls(data["name"], data["house"], data["title"])
+        house = House.from_dict(data["house"])
+
+        return cls(data["name"], house, data["title"])
