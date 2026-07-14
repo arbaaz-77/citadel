@@ -14,7 +14,7 @@ class Archive:
 
         for character in self.characters:
             print(f"Name: {character.name}")
-            print(f"House: {character.house}")
+            print(f"House: {character.house.name}")
             print(f"Title: {character.title}")
             print("-" * 35)
 

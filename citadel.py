@@ -16,11 +16,17 @@ def show_menu():
 
 def add_character_from_input(archive):
     name = input("Enter character name: ").strip()
-    house = input("Enter character house: ").strip()
+    house_name = input("Enter character house: ").strip().casefold()
     title = input("Enter character title: ").strip()
 
     if not name:
         print("Character name cannot be empty.")
+        return
+
+    house = houses.get(house_name)
+
+    if house is None:
+        print("That house does not exist in the archive.")
         return
 
     character = Character(name, house, title)
@@ -47,11 +53,18 @@ def remove_character_from_input(archive):
 
 
 # House Data
+
 stark = House("Stark", "Winter is Coming", "Direwolf", "The North")
 
 lannister = House("Lannister", "Hear Me Roar!", "Lion", "The Westerlands")
 
 targaryen = House("Targaryen", "Fire and Blood", "Three-Headed Dragon", "Dragonstone")
+
+houses = {
+    "stark": stark,
+    "lannister": lannister,
+    "targaryen": targaryen,
+}
 
 # Character Data
 characters = [
