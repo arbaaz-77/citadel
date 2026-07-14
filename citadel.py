@@ -100,6 +100,6 @@ def main():
             print("Invalid choice. Please try again.")
 
 
-archive = Archive(characters)
+archive = Archive(characters, houses)
 if __name__ == "__main__":
     main()
