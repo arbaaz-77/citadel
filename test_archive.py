@@ -1,17 +1,27 @@
+import pytest
+
 from archive import Archive
 from character import Character
 from house import House
 
 
-def test_add_character():
+# Fixtures
+@pytest.fixture
+def archive():
+    return Archive()
 
-    # Arrange
-    stark = House("Stark", "Winter is Coming", "Direwolf", "The North")
 
-    jon = Character("Jon Snow", stark, "King in the North")
+@pytest.fixture
+def stark():
+    return House("Stark", "Winter is Coming", "Direwolf", "The North")
 
-    archive = Archive()
 
+@pytest.fixture
+def jon(stark):
+    return Character("Jon Snow", stark, "King in the North")
+
+
+def test_add_character(archive, jon):
     # Act
     archive.add_character(jon)
 
@@ -19,15 +29,9 @@ def test_add_character():
     assert jon in archive.characters
 
 
-def test_duplicate_character_is_not_added():
-
+def test_duplicate_character_is_not_added(archive, jon, stark):
     # Arrange
-    stark = House("Stark", "Winter is Coming", "Direwolf", "The North")
-
-    jon = Character("Jon Snow", stark, "King in the North")
     duplicate_jon = Character("Jon Snow", stark, "Lord Commander")
-
-    archive = Archive()
 
     # Act
     archive.add_character(jon)
@@ -37,34 +41,22 @@ def test_duplicate_character_is_not_added():
     assert archive.characters == [jon]
 
 
-def test_find_character_is_case_insensitive():
-
+def test_find_character_is_case_insensitive(archive, jon):
     # Arrange
-    stark = House("Stark", "Winter is Coming", "Direwolf", "The North")
-
-    jon = Character("Jon Snow", stark, "King in the North")
-
-    archive = Archive()
+    archive.add_character(jon)
 
     # Act
-    archive.add_character(jon)
     result = archive.find_character("jOn sNoW")
 
     # Assert
     assert result == jon
 
 
-def test_remove_character():
-
+def test_remove_character(archive, jon):
     # Arrange
-    stark = House("Stark", "Winter is Coming", "Direwolf", "The North")
-
-    jon = Character("Jon Snow", stark, "King in the North")
-
-    archive = Archive()
+    archive.add_character(jon)
 
     # Act
-    archive.add_character(jon)
     archive.remove_character("Jon Snow")
 
     # Assert
