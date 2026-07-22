@@ -25,12 +25,13 @@ def test_duplicate_character_is_not_added():
     stark = House("Stark", "Winter is Coming", "Direwolf", "The North")
 
     jon = Character("Jon Snow", stark, "King in the North")
+    duplicate_jon = Character("Jon Snow", stark, "Lord Commander")
 
     archive = Archive()
 
     # Act
     archive.add_character(jon)
-    archive.add_character(jon)
+    archive.add_character(duplicate_jon)
 
     # Assert
     assert archive.characters == [jon]
