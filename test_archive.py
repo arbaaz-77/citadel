@@ -41,15 +41,34 @@ def test_duplicate_character_is_not_added(archive, jon, stark):
     assert archive.characters == [jon]
 
 
-def test_find_character_is_case_insensitive(archive, jon):
+@pytest.mark.parametrize(
+    "search_name, expected_to_find",
+    [
+        ("Jon Snow", True),
+        ("jon snow", True),
+        ("JON SNOW", True),
+        ("JoN sNoW", True),
+        ("Arya Stark", False),
+        ("Tyrion Lannister", False),
+    ],
+)
+def test_find_character(
+    archive,
+    jon,
+    search_name,
+    expected_to_find,
+):
     # Arrange
     archive.add_character(jon)
 
     # Act
-    result = archive.find_character("jOn sNoW")
+    result = archive.find_character(search_name)
 
     # Assert
-    assert result == jon
+    if expected_to_find:
+        assert result == jon
+    else:
+        assert result is None
 
 
 def test_remove_character(archive, jon):
