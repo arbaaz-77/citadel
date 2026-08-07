@@ -1,14 +1,19 @@
 import json
 
 from character import Character
+from house import House
 
 
 class Archive:
-    def __init__(self, characters=None, houses=None):
-        self.characters = characters if characters is not None else []
-        self.houses = houses if houses is not None else {}
+    def __init__(
+        self,
+        characters: list[Character] | None = None,
+        houses: dict[str, House] | None = None,
+    ) -> None:
+        self.characters: list[Character] = characters if characters is not None else []
+        self.houses: dict[str, House] = houses if houses is not None else {}
 
-    def view_characters(self):
+    def view_characters(self) -> None:
         if not self.characters:
             print("The archive contains no records.")
             return
@@ -19,14 +24,14 @@ class Archive:
             print(f"Title: {character.title}")
             print("-" * 35)
 
-    def find_character(self, name):
+    def find_character(self, name: str) -> Character | None:
         for character in self.characters:
             if character.name.casefold() == name.strip().casefold():
                 return character
 
         return None
 
-    def add_character(self, character):
+    def add_character(self, character: Character) -> None:
         if not isinstance(character, Character):
             print("Only Character objects can be added.")
             return
@@ -38,7 +43,7 @@ class Archive:
         self.characters.append(character)
         print(f"{character.name} added successfully.")
 
-    def remove_character(self, name):
+    def remove_character(self, name: str) -> None:
         character = self.find_character(name)
 
         if character:
@@ -47,7 +52,7 @@ class Archive:
         else:
             print("No record exists.")
 
-    def save(self):
+    def save(self) -> None:
         character_data = []
 
         for character in self.characters:
@@ -58,7 +63,7 @@ class Archive:
 
         print("Archive saved successfully.")
 
-    def load(self):
+    def load(self) -> None:
         try:
             with open("characters.json", "r", encoding="utf-8") as file:
                 character_data = json.load(file)

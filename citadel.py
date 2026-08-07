@@ -4,7 +4,7 @@ from house import House
 
 
 # functions
-def show_menu():
+def show_menu() -> None:
     print("\n===== THE CITADEL ARCHIVE =====")
     print("1. View Characters")
     print("2. Search Character")
@@ -14,7 +14,7 @@ def show_menu():
     print("6. Exit")
 
 
-def add_character_from_input(archive, houses):
+def add_character_from_input(archive: Archive, houses: dict[str, House]) -> None:
     name = input("Enter character name: ").strip()
     house_name = input("Enter character house: ").strip().casefold()
     title = input("Enter character title: ").strip()
@@ -33,7 +33,7 @@ def add_character_from_input(archive, houses):
     archive.add_character(character)
 
 
-def search_character_from_input(archive):
+def search_character_from_input(archive: Archive) -> None:
     search_name = input("Enter the name of the character to search: ").strip()
     character = archive.find_character(search_name)
 
@@ -46,7 +46,7 @@ def search_character_from_input(archive):
         print("No record exists.")
 
 
-def remove_character_from_input(archive):
+def remove_character_from_input(archive: Archive) -> None:
     name = input("Enter name of the character to remove: ").strip()
 
     archive.remove_character(name)
@@ -60,14 +60,14 @@ lannister = House("Lannister", "Hear Me Roar!", "Lion", "The Westerlands")
 
 targaryen = House("Targaryen", "Fire and Blood", "Three-Headed Dragon", "Dragonstone")
 
-houses = {
+houses: dict[str, House] = {
     stark.name.casefold(): stark,
     lannister.name.casefold(): lannister,
     targaryen.name.casefold(): targaryen,
 }
 
 # Character Data
-characters = [
+characters: list[Character] = [
     Character("Jon Snow", stark, "King in the North"),
     Character("Tyrion Lannister", lannister, "Hand of the King"),
     Character("Daenerys Targaryen", targaryen, "Mother of Dragons"),
@@ -75,7 +75,7 @@ characters = [
 
 
 # Program runs here
-def main():
+def main() -> None:
     archive.load()
 
     while True:
@@ -100,6 +100,6 @@ def main():
             print("Invalid choice. Please try again.")
 
 
-archive = Archive(characters, houses)
+archive: Archive = Archive(characters, houses)
 if __name__ == "__main__":
     main()
