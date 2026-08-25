@@ -1,15 +1,14 @@
+from dataclasses import dataclass
 from typing import Self
 
 from house import House
 
 
+@dataclass(frozen=True)
 class Character:
-
-    def __init__(self, name: str, house: House, title: str) -> None:
-
-        self.name = name
-        self.house = house
-        self.title = title
+    name: str
+    house: House
+    title: str
 
     def introduce(self) -> None:
         print(

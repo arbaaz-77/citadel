@@ -1,9 +1,13 @@
+from dataclasses import dataclass
+from typing import Self
+
+
+@dataclass(frozen=True)
 class House:
-    def __init__(self, name: str, words: str, sigil: str, region: str) -> None:
-        self.name = name
-        self.words = words
-        self.sigil = sigil
-        self.region = region
+    name: str
+    words: str
+    sigil: str
+    region: str
 
     def describe(self) -> None:
         print(f"House {self.name}")
@@ -20,5 +24,5 @@ class House:
         }
 
     @classmethod
-    def from_dict(cls, data: dict[str, str]) -> "House":
+    def from_dict(cls, data: dict[str, str]) -> Self:
         return cls(data["name"], data["words"], data["sigil"], data["region"])
